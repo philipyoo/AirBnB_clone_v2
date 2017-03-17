@@ -3,6 +3,7 @@ import os.path
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models import *
+from console import HBNBCommand
 
 
 class Test_FileStorage(unittest.TestCase):
@@ -11,6 +12,7 @@ class Test_FileStorage(unittest.TestCase):
     """
 
     def setUp(self):
+        self.cli = HBNBCommand()
         self.store = FileStorage()
 
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
@@ -22,10 +24,10 @@ class Test_FileStorage(unittest.TestCase):
         if os.path.isfile("file.json"):
             self.test_len = len(self.store.all())
 
-    def tearDown(self):
-        import os
-        if os.path.isfile("file.json"):
-            os.remove('file.json')
+#    def tearDown(self):
+#        import os
+#        if os.path.isfile("file.json"):
+#            os.remove('file.json')
 
     def test_all(self):
         self.assertEqual(len(self.store.all()), self.test_len)
