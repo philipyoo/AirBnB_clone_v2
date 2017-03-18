@@ -65,7 +65,7 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.assertEqual(output, "** class doesn't exist **")
 
-    def test_create(self):
+    def test_create_correct(self):
         with captured_output() as (out, err):
             self.cli.do_create('')
         output = out.getvalue().strip()
@@ -79,6 +79,17 @@ class Test_Console(unittest.TestCase):
             self.cli.do_show("BaseModel {}".format(output))
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
+
+    def test_create_correct_with_extra_args(self):
+        test_input = """Place city_id="0001" user_id="0001"
+        name="My_little_house" number_rooms=4 number_bathrooms=2 max_guest=10
+        price_by_night=300 latitude=37.773972 longitude=-122.431297
+        id="f519fb40-1f5c-458b-945c-2ee8eaaf4900" """
+
+        with captured_output() as (out, err):
+            self.cli.do_create(test_input)
+        output = out.getvalue().strip()
+        self.assertEqual(output, "f519fb40-1f5c-458b-945c-2ee8eaaf4900")
 
     def test_destroy_correct(self):
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),

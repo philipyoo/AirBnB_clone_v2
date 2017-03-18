@@ -34,7 +34,7 @@ class Test_PlaceModel(unittest.TestCase):
         self.assertEqual(self.model.price_by_night, 0)
         self.assertEqual(self.model.latitude, 0.0)
         self.assertEqual(self.model.longitude, 0.0)
-        self.assertEqual(self.model.amenities, [''])
+        self.assertEqual(self.model.amenities, [])
 
 
 if __name__ == "__main__":
