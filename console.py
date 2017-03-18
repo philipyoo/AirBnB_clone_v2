@@ -4,7 +4,7 @@ from models import *
 
 
 class HBNBCommand(cmd.Cmd):
-    prompt = '(hbnb)'
+    prompt = '(hbnb) '
     storage.reload()
 
     valid_classes = ["BaseModel", "User", "State",
@@ -25,15 +25,32 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, args):
         """Create a new Basemodel"""
         args = args.split()
-        if len(args) != 1:
+        if len(args) == 0:
             print("** class name missing **")
+            return
+
+        if args[0] not in HBNBCommand.valid_classes:
+            print("** class doesn't exist **")
+            return
+
+        if len(args) > 1:
+            storage = {}
+            for arg in args[1:]:
+                pair = arg.split("=")
+                if pair[1].startswith('"') and pair[1].endswith('"'):
+                    pair[1] = pair[1][1:-1]
+                    pair[1] = pair[1].replace("_", " ")
+                elif "." in pair[1]:
+                    pair[1] = float(pair[1])
+                else:
+                    pair[1] = int(pair[1])
+                storage[pair[0]] = pair[1]
+            new_obj = eval(args[0])(**storage)
         else:
-            if len(args) > 0 and args[0] in HBNBCommand.valid_classes:
-                new_obj = eval(args[0])()
-                print(new_obj.id)
-                new_obj.save()
-            else:
-                return
+            new_obj = eval(args[0])()
+
+        print(new_obj.id)
+        new_obj.save()
 
     def do_show(self, args):
         """Usage: show BaseModel 1234-1234-1234"""

@@ -17,3 +17,7 @@ class Place(BaseModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__()
+
+        if kwargs is not None:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
