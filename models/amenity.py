@@ -7,3 +7,7 @@ class Amenity(BaseModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        if kwargs is not None:
+            for k, v in kwargs.items():
+                setattr(self, k, v)
