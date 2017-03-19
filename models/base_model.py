@@ -8,7 +8,7 @@ from sqlalchemy.ext.declarative import declarative_base
 Base = declarative_base()
 
 
-class BaseModel:
+class BaseModel(Base):
     """The base class for all storage objects in this project"""
     id = Column(String, primary_key=True, nullable=False)
     created_at = Column(DateTime, nullable=False, default=datetime.now())
