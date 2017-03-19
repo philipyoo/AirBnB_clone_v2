@@ -1,6 +1,7 @@
 import unittest
 from datetime import datetime
 from models import *
+from console import HBNBCommand
 
 
 class Test_PlaceModel(unittest.TestCase):
@@ -9,8 +10,12 @@ class Test_PlaceModel(unittest.TestCase):
     """
 
     def setUp(self):
+        self.cli = HBNBCommand()
         self.model = Place()
         self.model.save()
+
+    def tearDown(self):
+        self.cli.do_destroy("Place " + self.model.id)
 
     def test_var_initialization(self):
         self.assertTrue(hasattr(self.model, "city_id"))
