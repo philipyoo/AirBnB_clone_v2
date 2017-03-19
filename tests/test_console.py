@@ -79,6 +79,7 @@ class Test_Console(unittest.TestCase):
             self.cli.do_show("BaseModel {}".format(output))
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
+        self.cli.do_destroy("BaseModel " + output)
 
     def test_create_correct_with_extra_args(self):
         test_input = """Place city_id="0001" user_id="0001"
@@ -136,6 +137,7 @@ class Test_Console(unittest.TestCase):
         self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
         self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
         self.assertFalse("123-456-abc" in output)
+        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
 
     def test_all_correct_with_class(self):
         with captured_output() as (out, err):
