@@ -245,9 +245,15 @@ class HBNBCommand(cmd.Cmd):
                     pair[1] = pair[1][1:-1]
                     pair[1] = pair[1].replace("_", " ")
                 elif "." in pair[1]:
-                    pair[1] = float(pair[1])
+                    try:
+                        pair[1] = float(pair[1])
+                    except:
+                        continue
                 else:
-                    pair[1] = int(pair[1])
+                    try:
+                        pair[1] = int(pair[1])
+                    except:
+                        continue
                 storage[pair[0]] = pair[1]
         return storage
 
