@@ -34,17 +34,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if len(args) > 1:
-            storage = {}
-            for arg in args[1:]:
-                pair = arg.split("=")
-                if pair[1].startswith('"') and pair[1].endswith('"'):
-                    pair[1] = pair[1][1:-1]
-                    pair[1] = pair[1].replace("_", " ")
-                elif "." in pair[1]:
-                    pair[1] = float(pair[1])
-                else:
-                    pair[1] = int(pair[1])
-                storage[pair[0]] = pair[1]
+            storage = self.parse_kwargs(args[1:])
             new_obj = eval(args[0])(**storage)
         else:
             new_obj = eval(args[0])()
@@ -244,6 +234,22 @@ class HBNBCommand(cmd.Cmd):
                 return
         else:
             print("Not a valid command")
+
+    @staticmethod
+    def parse_kwargs(args):
+        storage = {}
+        for arg in args:
+            pair = arg.split("=")
+            if len(pair) == 2:
+                if pair[1].startswith('"') and pair[1].endswith('"'):
+                    pair[1] = pair[1][1:-1]
+                    pair[1] = pair[1].replace("_", " ")
+                elif "." in pair[1]:
+                    pair[1] = float(pair[1])
+                else:
+                    pair[1] = int(pair[1])
+                storage[pair[0]] = pair[1]
+        return storage
 
 
 if __name__ == '__main__':
