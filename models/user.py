@@ -2,7 +2,7 @@
 from models import *
 from sqlalchemy import Column, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 Base = declarative_base()
 
@@ -20,7 +20,3 @@ class User(BaseModel, Base):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        if kwargs is not None:
-            for k, v in kwargs.items():
-                setattr(self, k, v)
