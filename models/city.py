@@ -1,9 +1,6 @@
 #!/usr/bin/python3
 from models import *
 from sqlalchemy import Column, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-
-Base = declarative_base()
 
 
 class City(BaseModel, Base):
