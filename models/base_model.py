@@ -48,3 +48,6 @@ class BaseModel:
         if ("_sa_instance_state" in dupe):
             dupe.pop("_sa_instance_state", 0)
         return dupe
+
+    def delete(self):
+        models.storage.delete(self.id)
