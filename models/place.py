@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 from models import *
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-
-Base = declarative_base()
+from sqlalchemy.orm import relationship, backref
 
 
 class Place(BaseModel, Base):
@@ -33,5 +30,3 @@ class PlaceAmenity(Base):
                       primary_key=True)
     amenity_id = Column(String(60), nullable=False, ForeignKey('amenities.id'),
                         primary_key=True)
-
-    place = relationship("Place", backref=backref("place_amenity")
