@@ -255,6 +255,8 @@ class HBNBCommand(cmd.Cmd):
                     except:
                         continue
                 storage[pair[0]] = pair[1]
+            else:
+                return {}
         return storage
 
 
