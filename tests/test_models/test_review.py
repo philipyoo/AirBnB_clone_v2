@@ -18,12 +18,11 @@ class Test_ReviewModel(unittest.TestCase):
         self.cli.do_destroy("Review " + self.model.id)
 
     def test_var_initialization(self):
+        self.assertTrue(hasattr(self.model, "__tablename__"))
+        self.assertEqual(self.model.__tablename__, "reviews")
         self.assertTrue(hasattr(self.model, "place_id"))
         self.assertTrue(hasattr(self.model, "user_id"))
         self.assertTrue(hasattr(self.model, "text"))
-        self.assertEqual(self.model.place_id, "")
-        self.assertEqual(self.model.user_id, "")
-        self.assertEqual(self.model.text, "")
 
 
 if __name__ == "__main__":
