@@ -33,7 +33,11 @@ class Test_Console(unittest.TestCase):
         self.model = BaseModel(test_args)
         self.model.save()
 
+        self.creations = []
+
     def tearDown(self):
+        for obj_id in self.creations:
+            self.cli.do_destroy("BaseModel " + obj_id)
         self.cli.do_destroy("BaseModel d3da85f2-499c-43cb-b33d-3d7935bc808c")
 
     def test_quit(self):
@@ -74,12 +78,12 @@ class Test_Console(unittest.TestCase):
         with captured_output() as (out, err):
             self.cli.do_create("BaseModel")
         output = out.getvalue().strip()
+        self.creations.append(output)
 
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel {}".format(output))
         output2 = out.getvalue().strip()
         self.assertTrue(output in output2)
-        self.cli.do_destroy("BaseModel " + output)
 
     def test_create_correct_with_extra_args(self):
         test_input = """Place city_id="0001" user_id="0001"
@@ -99,7 +103,7 @@ class Test_Console(unittest.TestCase):
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
         testmodel = BaseModel(test_args)
         testmodel.save()
-        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        self.creations.append(testmodel.id)
 
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
@@ -131,13 +135,14 @@ class Test_Console(unittest.TestCase):
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
         testmodel = BaseModel(test_args)
         testmodel.save()
+        self.creations.append(testmodel.id)
+
         with captured_output() as (out, err):
             self.cli.do_all("")
         output = out.getvalue().strip()
         self.assertTrue("d3da85f2-499c-43cb-b33d-3d7935bc808c" in output)
         self.assertTrue("f519fb40-1f5c-458b-945c-2ee8eaaf4900" in output)
         self.assertFalse("123-456-abc" in output)
-        self.cli.do_destroy("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
 
     def test_all_correct_with_class(self):
         with captured_output() as (out, err):
