@@ -18,13 +18,6 @@ class DBStorage:
                                       ":3306/" +
                                       os.environ['HBNB_MYSQL_DB'])
 
-
-#        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}:3306/{}")
-#        .format(os.environ['HBNB_MYSQL_USER'],
-#                os.environ['HBNB_MYSQL_PWD'],
-#                os.environ['HBNB_MYSQL_HOST'],
-#                os.environ['HBNB_MYSQL_DB'])
-
     def all(self, cls=None):
         storage = {}
         if cls is None:
@@ -38,6 +31,10 @@ class DBStorage:
                 storage[instance.id] = instance
 
         return storage
+
+    def new(self, obj):
+        self.__session.add(obj)
+        self.__session.flush()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine)
