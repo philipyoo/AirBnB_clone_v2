@@ -41,3 +41,6 @@ class FileStorage:
                     FileStorage.__objects[k] = eval(cls)(temp[k])
         except Exception as e:
             pass
+
+    def delete(self, obj_id):
+        FileStorage.__objects.pop(obj_id, 0)
