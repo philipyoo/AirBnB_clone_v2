@@ -103,7 +103,7 @@ class Test_Console(unittest.TestCase):
                      'created_at': datetime(2017, 2, 12, 00, 31, 53, 331900)}
         testmodel = BaseModel(test_args)
         testmodel.save()
-        self.creations.append(testmodel.id)
+        self.cli.do_destroy("BaseModel " + testmodel.id)
 
         with captured_output() as (out, err):
             self.cli.do_show("BaseModel f519fb40-1f5c-458b-945c-2ee8eaaf4900")
