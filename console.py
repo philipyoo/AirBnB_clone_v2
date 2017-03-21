@@ -248,17 +248,13 @@ class HBNBCommand(cmd.Cmd):
                     try:
                         pair[1] = float(pair[1])
                     except:
-                        return {}
                         continue
                 else:
                     try:
                         pair[1] = int(pair[1])
                     except:
-                        return {}
                         continue
                 storage[pair[0]] = pair[1]
-            else:
-                return {}
         return storage
 
 
