@@ -27,7 +27,7 @@ class Test_BaseModel(unittest.TestCase):
         self.assertIsInstance(self.model1, BaseModel)
         self.assertTrue(hasattr(self.model1, "created_at"))
         self.assertTrue(hasattr(self.model1, "id"))
-        self.assertFalse(hasattr(self.model1, "updated_at"))
+        self.assertTrue(hasattr(self.model1, "updated_at"))
 
     def test_reinstantiation(self):
         self.assertIsInstance(self.model2, BaseModel)
@@ -37,13 +37,9 @@ class Test_BaseModel(unittest.TestCase):
                          datetime(2017, 2, 11, 2, 6, 55, 258849))
 
     def test_save(self):
-        self.assertFalse(hasattr(self.model1, "updated_at"))
-        self.model1.save()
-        self.assertTrue(hasattr(self.model1, "updated_at"))
         old_time = self.model2.updated_at
         self.model2.save()
         self.assertNotEqual(old_time, self.model2.updated_at)
-        self.cli.do_destroy("BaseModel " + self.model1.id)
 
     def test_to_json(self):
         jsonified = self.model2.to_json()
