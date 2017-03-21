@@ -50,5 +50,9 @@ class Test_BaseModel(unittest.TestCase):
         self.assertTrue(hasattr(jsonified, "__class__"))
         self.assertEqual(jsonified["__class__"], "BaseModel")
 
+    def test_to_json_no_sa_instance_state(self):
+        jsonified = self.model2.to_json()
+        self.assertFalse(hasattr(jsonified, "_sa_instance_state"))
+
 if __name__ == "__main__":
     unittest.main()
