@@ -34,6 +34,8 @@ class DBStorage:
 
     def new(self, obj):
         self.__session.add(obj)
+
+    def save(self):
         self.__session.flush()
 
     def reload(self):
