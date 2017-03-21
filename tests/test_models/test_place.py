@@ -18,6 +18,8 @@ class Test_PlaceModel(unittest.TestCase):
         self.cli.do_destroy("Place " + self.model.id)
 
     def test_var_initialization(self):
+        self.assertTrue(hasattr(self.model, "__tablename__"))
+        self.assertEqual(self.model.__tablename__, "places")
         self.assertTrue(hasattr(self.model, "city_id"))
         self.assertTrue(hasattr(self.model, "user_id"))
         self.assertTrue(hasattr(self.model, "name"))
@@ -29,17 +31,6 @@ class Test_PlaceModel(unittest.TestCase):
         self.assertTrue(hasattr(self.model, "latitude"))
         self.assertTrue(hasattr(self.model, "longitude"))
         self.assertTrue(hasattr(self.model, "amenities"))
-        self.assertEqual(self.model.city_id, "")
-        self.assertEqual(self.model.user_id, "")
-        self.assertEqual(self.model.name, "")
-        self.assertEqual(self.model.description, "")
-        self.assertEqual(self.model.number_rooms, 0)
-        self.assertEqual(self.model.number_bathrooms, 0)
-        self.assertEqual(self.model.max_guest, 0)
-        self.assertEqual(self.model.price_by_night, 0)
-        self.assertEqual(self.model.latitude, 0.0)
-        self.assertEqual(self.model.longitude, 0.0)
-        self.assertEqual(self.model.amenities, [])
 
 
 if __name__ == "__main__":
