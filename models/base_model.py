@@ -21,6 +21,7 @@ class BaseModel:
                 setattr(self, k, args[0][k])
         else:
             self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             self.id = str(uuid.uuid4())
 
         if kwargs is not None:
@@ -42,8 +43,7 @@ class BaseModel:
         """convert to json"""
         dupe = self.__dict__.copy()
         dupe["created_at"] = str(dupe["created_at"])
-        if ("updated_at" in dupe):
-            dupe["updated_at"] = str(dupe["updated_at"])
+        dupe["updated_at"] = str(dupe["updated_at"])
         dupe["__class__"] = type(self).__name__
         if ("_sa_instance_state" in dupe):
             dupe.pop("_sa_instance_state", 0)
