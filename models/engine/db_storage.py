@@ -17,18 +17,20 @@ class DBStorage:
                                       "@" + os.environ['HBNB_MYSQL_HOST'] +
                                       ":3306/" +
                                       os.environ['HBNB_MYSQL_DB'])
+        Base.metadata.create_all(self.__engine)
 
     def all(self, cls=None):
         storage = {}
         if cls is None:
-            for instance in self.__session.query(User, State, City,
-                                                 Amenity, Place, Review):
-                storage[instance.id] = instance
+            for cls_name in self.valid_classes:
+                for instance in self.__session.query(eval(cls_name)):
+                    storage[instance.id] = instance
         else:
+            print("inside else")
             if cls not in valid_classes:
                 raise TypeError("Invalid class type")
-            for instance in self.__session.query(cls):
-                storage[instance.id] = instance
+                for instance in self.__session.query(cls):
+                    storage[instance.id] = instance
 
         return storage
 
