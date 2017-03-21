@@ -18,10 +18,10 @@ class Test_CityModel(unittest.TestCase):
         self.cli.do_destroy("City " + self.model.id)
 
     def test_var_initialization(self):
+        self.assertTrue(hasattr(self.model, "__tablename__"))
+        self.assertEqual(self.model.__tablename__, "cities")
         self.assertTrue(hasattr(self.model, "name"))
         self.assertTrue(hasattr(self.model, "state_id"))
-        self.assertEqual(self.model.name, "")
-        self.assertEqual(self.model.state_id, "")
 
 
 if __name__ == "__main__":
