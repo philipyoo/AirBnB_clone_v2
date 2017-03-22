@@ -36,10 +36,10 @@ class DBStorage:
 
     def new(self, obj):
         self.__session.add(obj)
-        self.__session.commit()
+#        self.__session.commit()
 
     def save(self):
-        self.__session.flush()
+        self.__session.commit()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine)
@@ -53,4 +53,4 @@ class DBStorage:
             return
 
         eval(obj.__class__.__name__).query.filter_by(id=obj.id).delete()
-        self.__session.commit()
+#        self.__session.commit()
