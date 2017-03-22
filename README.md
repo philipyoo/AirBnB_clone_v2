@@ -32,3 +32,13 @@ Additionally, the console also supports the following command formats:
 - **\<class name>.destroy(\<id>)**, which will delete the instance with correct id and class;
 - **\<class name>.update(\<id>, \<attribute name>, \<attribute value>)**, which will update an instance of the given class and id with the new attribute;
 - **\<class name>.update(\<id>, \<dictionary representation>)**, which will update an instance of the given class and id with a dictionary of key value pairs that will be new attributes for the objects. 
+
+----------------------------------------
+
+** List of useful commands: **
+
+- `$ HBNB_TYPE_STORAGE="" python3 -m unittest discover tests 2>&1`
+- `$ HBNB_MYSQL_ENV=test HBNB_MYSQL_USER=hbnb_test HBNB_MYSQL_PWD=hbnb_test_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_test_db HBNB_TYPE_STORAGE=db python3 -m unittest discover tests 2>&1`
+- `$ cat setup_mysql_dev.sql | mysql -hlocalhost -uroot -p` && `$ echo "SHOW DATABASES;" | mysql -uhbnb_dev -p | grep hbnb_dev_db` && `$ echo "SHOW GRANTS FOR 'hbnb_dev'@'localhost';" | mysql -uroot -p`
+- `$ echo 'create State name="California"' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py`
+- `$ echo 'all State' | HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db ./console.py`
