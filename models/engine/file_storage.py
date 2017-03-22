@@ -11,7 +11,7 @@ class FileStorage:
     def __init__(self):
         self.reload()
 
-    def all(self):
+    def all(self, cls=None):
         return FileStorage.__objects
 
     def new(self, obj):
