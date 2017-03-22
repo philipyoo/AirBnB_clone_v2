@@ -17,7 +17,15 @@ class DBStorage:
                                       "@" + os.environ['HBNB_MYSQL_HOST'] +
                                       ":3306/" +
                                       os.environ['HBNB_MYSQL_DB'])
+
         Base.metadata.create_all(self.__engine)
+
+        try:
+            if os.environ['HBNB_MYSQL_ENV'] == "test":
+                print("Dropping db\n")
+                Base.metadata.drop_all(self.__engine)
+        except KeyError:
+            print("No env var 'HBNB_MYSQL_ENV'")
 
     def all(self, cls=None):
         storage = {}
@@ -36,10 +44,15 @@ class DBStorage:
 
     def new(self, obj):
         self.__session.add(obj)
-#        self.__session.commit()
 
     def save(self):
-        self.__session.commit()
+        try:
+            self.__session.commit()
+        except:
+            self.__session.rollback()
+            raise
+        finally:
+            self.__session.close()
 
     def reload(self):
         Session = sessionmaker(bind=self.__engine)
@@ -53,4 +66,3 @@ class DBStorage:
             return
 
         eval(obj.__class__.__name__).query.filter_by(id=obj.id).delete()
-#        self.__session.commit()
