@@ -1,6 +1,7 @@
 import unittest
 import sys
 import io
+import os
 from contextlib import contextmanager
 from models import *
 from datetime import datetime
@@ -18,6 +19,7 @@ def captured_output():
         sys.stdout, sys.stderr = old_out, old_err
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE', '') == "db", "db")
 class Test_Console(unittest.TestCase):
     """
     Test the console

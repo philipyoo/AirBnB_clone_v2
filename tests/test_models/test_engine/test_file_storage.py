@@ -1,11 +1,13 @@
 import unittest
 import os.path
+import os
 from datetime import datetime
 from models.engine.file_storage import FileStorage
 from models import *
 from console import HBNBCommand
 
 
+@unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE', '') == "db", "db")
 class Test_FileStorage(unittest.TestCase):
     """
     Test the file storage class
