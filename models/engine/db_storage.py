@@ -43,8 +43,6 @@ class DBStorage:
     def new(self, obj):
         self.__session.add(obj)
 
-        self.__session.close()
-
     def save(self):
         try:
             self.__session.commit()
@@ -76,4 +74,3 @@ class DBStorage:
 
         print(obj)
         eval(obj).query.filter_by(id=obj.id).delete()
-        self.__session.close()
