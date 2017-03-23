@@ -36,9 +36,10 @@ class Test_Console(unittest.TestCase):
         self.creations = []
 
     def tearDown(self):
+        self.cli.do_destroy("Amenity d3da85f2-499c-43cb-b33d-3d7935bc808c")
+
         for obj_id in self.creations:
             self.cli.do_destroy("Amenity " + obj_id)
-        self.cli.do_destroy("Amenity d3da85f2-499c-43cb-b33d-3d7935bc808c")
 
     def test_quit(self):
         with self.assertRaises(SystemExit):
@@ -80,14 +81,9 @@ class Test_Console(unittest.TestCase):
         output = out.getvalue().strip()
         self.creations.append(output)
 
-        print("")
-        print(output)
-        print("")
         with captured_output() as (out, err):
             self.cli.do_show("Amenity {}".format(output))
         output2 = out.getvalue().strip()
-        print(output2)
-        print("")
         self.assertTrue(output in output2)
 
     def test_create_correct_with_extra_args(self):
