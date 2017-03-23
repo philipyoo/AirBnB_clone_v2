@@ -12,7 +12,6 @@ class Test_UserModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = User(email="hello@gmail.com", password="pwd")
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("User " + self.model.id)

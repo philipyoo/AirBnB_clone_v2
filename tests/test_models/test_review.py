@@ -12,7 +12,6 @@ class Test_ReviewModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = Review()
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("Review " + self.model.id)

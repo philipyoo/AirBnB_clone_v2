@@ -12,7 +12,6 @@ class Test_AmenityModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = Amenity()
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("Amenity " + self.model.id)

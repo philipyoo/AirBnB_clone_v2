@@ -12,7 +12,6 @@ class Test_PlaceModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = Place()
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("Place " + self.model.id)

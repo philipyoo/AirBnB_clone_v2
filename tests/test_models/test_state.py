@@ -12,7 +12,6 @@ class Test_StateModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = State()
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("State " + self.model.id)

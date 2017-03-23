@@ -12,7 +12,6 @@ class Test_CityModel(unittest.TestCase):
     def setUp(self):
         self.cli = HBNBCommand()
         self.model = City()
-        self.model.save()
 
     def tearDown(self):
         self.cli.do_destroy("City " + self.model.id)
