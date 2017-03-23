@@ -120,6 +120,9 @@ class HBNBCommand(cmd.Cmd):
         res = storage.update(args[0], args[1], args[2], args[3])
         if res == 0:
             print("** no instance found **")
+        else:
+            print(args[2])
+            print(args[3])
 
         #cls_objs = storage.all(args[0])
         #for obj_id in cls_objs.keys():
