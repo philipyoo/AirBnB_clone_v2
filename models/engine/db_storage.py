@@ -34,7 +34,7 @@ class DBStorage:
         else:
             if cls not in self.valid_classes:
                 return
-            for instance in self.__session.query(cls):
+            for instance in self.__session.query(eval(cls)):
                 storage[instance.id] = instance
 
         self.__session.close()
