@@ -35,6 +35,14 @@ class FileStorage:
         with open(FileStorage.__file_path, mode="w", encoding="utf-8") as fd:
             fd.write(json.dumps(store))
 
+    def update(self, cls, obj_id, key, new_value):
+        if obj_id not in FileStorage.__objects:
+            return 0
+
+        obj = FileStorage.__objects[obj_id]
+        setattr(obj, key, new_value)
+        return 1
+
     def reload(self):
         try:
             with open(FileStorage.__file_path,

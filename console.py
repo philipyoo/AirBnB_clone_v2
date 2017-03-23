@@ -116,13 +116,17 @@ class HBNBCommand(cmd.Cmd):
         if args[0] not in HBNBCommand.valid_classes:
             print("** class doesn't exist **")
             return
-        all_objs = storage.all()
-        for obj_id in all_objs.keys():
-            if obj_id == args[1]:
-                setattr(all_objs[obj_id], args[2], args[3])
-                storage.save()
-                return
-        print("** no instance found **")
+
+        res = storage.update(args[0], args[1], args[2], args[3])
+        if res == 0:
+            print("** no instance found **")
+
+        #cls_objs = storage.all(args[0])
+        #for obj_id in cls_objs.keys():
+            #if obj_id == args[1]:
+                #setattr(cls_objs[obj_id], args[2], args[3])
+                #storage.save()
+                #return
 
     def do_User(self, args):
         """Usages:

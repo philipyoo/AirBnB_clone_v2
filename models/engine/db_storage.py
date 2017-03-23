@@ -18,32 +18,32 @@ class DBStorage:
                                       ":3306/" +
                                       os.environ['HBNB_MYSQL_DB'])
 
-        Base.metadata.create_all(self.__engine)
-
         try:
             if os.environ['HBNB_MYSQL_ENV'] == "test":
-                print("Dropping db\n")
                 Base.metadata.drop_all(self.__engine)
         except KeyError:
-            print("No env var 'HBNB_MYSQL_ENV'")
+            pass
 
     def all(self, cls=None):
         storage = {}
         if cls is None:
             for cls_name in self.valid_classes:
                 for instance in self.__session.query(eval(cls_name)):
+                    print(instance)
                     storage[instance.id] = instance
         else:
-            print("inside else")
-            if cls not in valid_classes:
-                raise TypeError("Invalid class type")
-                for instance in self.__session.query(cls):
-                    storage[instance.id] = instance
+            if cls not in self.valid_classes:
+                return
+            for instance in self.__session.query(cls):
+                storage[instance.id] = instance
 
+        self.__session.close()
         return storage
 
     def new(self, obj):
         self.__session.add(obj)
+
+        self.__session.close()
 
     def save(self):
         try:
@@ -54,7 +54,19 @@ class DBStorage:
         finally:
             self.__session.close()
 
+    def update(self, cls, obj_id, key, new_value):
+        res = self.__session.query(eval(cls)).filter(eval(cls).id == obj_id)
+
+        print(res.count())
+
+        if res.count() == 0:
+            return 0
+
+        res.update({key: (new_value)})
+        return 1
+
     def reload(self):
+        Base.metadata.create_all(self.__engine)
         Session = sessionmaker(bind=self.__engine)
         self.__session = Session()
 
@@ -62,7 +74,6 @@ class DBStorage:
         if obj is None:
             return
 
-        if obj.__class__.__name__ not in valid_classes:
-            return
-
-        eval(obj.__class__.__name__).query.filter_by(id=obj.id).delete()
+        print(obj)
+        eval(obj).query.filter_by(id=obj.id).delete()
+        self.__session.close()
