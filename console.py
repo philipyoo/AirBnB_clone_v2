@@ -74,11 +74,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        if storage.delete(args[1]) != 0:
-            storage.save()
-            return
-        else:
-            print("** no instance found **")
+        cls_objs = storage.all(args[0])
+        for objs_id in cls_objs.keys():
+            if objs_id == args[1]:
+                storage.delete(cls_objs[objs_id])
+                storage.save()
+                return
+
+        print("** no instance found **")
 
     def do_all(self, args):
         """Usage: all Basemodel or all"""
