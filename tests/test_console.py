@@ -96,7 +96,21 @@ class Test_Console(unittest.TestCase):
             self.cli.do_create(test_input)
         output = out.getvalue().strip()
         self.assertEqual(output, "f519fb40-1f5c-458b-945c-2ee8eaaf4900")
-        self.cli.do_destroy("Place f519fb40-1f5c-458b-945c-2ee8eaaf4900")
+        self.creations.append(output)
+
+    def test_create_correct_with_string_pair(self):
+        test_input = """Amenity name="wifi" """
+
+        with captured_output() as (out, err):
+            self.cli.do_create(test_input)
+        output = out.getvalue().strip()
+
+        with captured_output() as (out, err):
+            self.cli.do_show("Amenity " + output)
+        output2 = out.getvalue().strip()
+
+        self.assertTrue("'name': 'wifi'" in output2)
+        self.creations.append(output)
 
     def test_destroy_correct(self):
         test_args = {'updated_at': datetime(2017, 2, 12, 00, 31, 53, 331997),
