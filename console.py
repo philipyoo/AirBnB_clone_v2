@@ -124,13 +124,6 @@ class HBNBCommand(cmd.Cmd):
             print(args[2])
             print(args[3])
 
-        #cls_objs = storage.all(args[0])
-        #for obj_id in cls_objs.keys():
-            #if obj_id == args[1]:
-                #setattr(cls_objs[obj_id], args[2], args[3])
-                #storage.save()
-                #return
-
     def do_User(self, args):
         """Usages:
         User.all() - displays all objects of class User
