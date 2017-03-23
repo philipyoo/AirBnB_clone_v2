@@ -72,5 +72,4 @@ class DBStorage:
         if obj is None:
             return
 
-        print(obj)
         eval(obj).query.filter_by(id=obj.id).delete()
