@@ -29,7 +29,6 @@ class DBStorage:
         if cls is None:
             for cls_name in self.valid_classes:
                 for instance in self.__session.query(eval(cls_name)):
-                    print(instance)
                     storage[instance.id] = instance
         else:
             if cls not in self.valid_classes:
