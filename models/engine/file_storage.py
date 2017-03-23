@@ -51,5 +51,8 @@ class FileStorage:
         except Exception as e:
             pass
 
-    def delete(self, obj_id):
-        return FileStorage.__objects.pop(obj_id, 0)
+    def delete(self, obj=None):
+        if obj is None:
+            return
+
+        FileStorage.__objects.pop(obj.id, 0)
