@@ -22,3 +22,21 @@ $ `python3 -m web_flask.1-hbnb_route`
 And to test it:
 $ `curl 0.0.0.0:5000/hbnb ; echo "" | cat -e`
 
+
+## `2-c_route.py`
+
+In additoin to the script from `1-hbnb_route.py`, add:
+- Route `/c/<text>` that displays "C " followed by value of `text`
+- The `text` value should replace any underscores with spaces
+
+To run the file:
+$ `python3 -m web_flask.2-c_route`
+
+And to test it:
+$ `curl 0.0.0.0:5000/c/is_fun ; echo "" | cat -e`
+$ `curl 0.0.0.0:5000/c/cool ; echo "" | cat -e`
+$ `curl 0.0.0.0:5000/c`
+
+Note: The last tests should return html formatted 404 Not Found.
+
+
