@@ -9,3 +9,16 @@ $ `python3 -m web_flask.0-hello_route`
 
 And to test it:
 $ `curl 0.0.0.0:5000 ; echo "" | cat -e`
+
+
+## `1-hbnb_route.py`
+
+In addition to the script from `0-hello_route.py`, add:
+- Route `/hbnb` that displays "HBNB"
+
+To run the file:
+$ `python3 -m web_flask.1-hbnb_route`
+
+And to test it:
+$ `curl 0.0.0.0:5000/hbnb ; echo "" | cat -e`
+
