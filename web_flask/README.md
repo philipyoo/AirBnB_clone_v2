@@ -101,7 +101,7 @@ $ `curl 0.0.0.0:5000/number_odd_or_even/32 ; echo ""`
 $ `curl 0.0.0.0:5000/number_odd_or_even/python`
 
 
-## `web_flask/7-states_list.py` && `web_flask/templates/7-states_list.html`
+## `7-states_list.py` && `templates/7-states_list.html`
 
 In addition to the script from `6-number_odd_or_even.py`, add:
 - Route `/states_list` that uses template `7-states_list.html`
@@ -112,3 +112,19 @@ $ `HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhos
 
 And to test it:
 $ `curl 0.0.0.0:5000/states_list ; echo ""`
+
+
+## `8-cities_by_states.py` && `templates/8-cities_by_states.html`
+
+In addition to the script from `7-states_list.py`, add:
+- Route `/cities_by_states` that uses template `8-cities_by_states.html`
+- Template should display all State objects in db_storage sorted by state name
+- Template should display all City objects connected with each state, sorted
+
+To run the file:
+$ `HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.8-cities_by_states`
+
+And to test it:
+$ `curl 0.0.0.0:5000/cities_by_states ; echo ""`
+
+
