@@ -64,3 +64,6 @@ class FileStorage:
             return
 
         FileStorage.__objects.pop(obj.id, 0)
+
+    def close(self):
+        self.save()

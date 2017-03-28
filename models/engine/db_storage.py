@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import os
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm.scoping import scoped_session
 from sqlalchemy import create_engine
 from models import *
 
@@ -64,11 +65,13 @@ class DBStorage:
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine))
 
     def delete(self, obj=None):
         if obj is None:
             return
 
         eval(obj).query.filter_by(id=obj.id).delete()
+
+    def close(self):
+        self.__session.remove()
