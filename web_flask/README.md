@@ -84,3 +84,18 @@ $ `python3 -m web_flask.5-number_template`
 And to test it:
 $ `curl 0.0.0.0:5000/number_template/89 ; echo ""`
 $ `curl 0.0.0.0:5000/number_template/8.9`
+
+
+## `6-number_odd_or_even.py` && `templates/6-number_odd_or_even.html`
+
+In addition to the script from `5-number_template.py`, add:
+- Route `/number_odd_or_even/<n>` that uses template `6-number_odd_or_even.html`
+- Template should display the number and also if it is even or odd
+
+To run the file:
+$ `python3 -m web_flask.6-number_odd_or_even`
+
+And to test it:
+$ `curl 0.0.0.0:5000/number_odd_or_even/89 ; echo ""`
+$ `curl 0.0.0.0:5000/number_odd_or_even/32 ; echo ""`
+$ `curl 0.0.0.0:5000/number_odd_or_even/python`
