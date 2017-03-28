@@ -56,3 +56,17 @@ $ `curl 0.0.0.0:5000/python/ ; echo "" | cat -e`
 
 Note: The last 2 tests above should return "Python is cool"
 
+
+## `4-number_route.py`
+
+In addition to the script from `3-python_route.py`, add:
+- Route `/number/<n>` that displays "<n> is a number" only if `n` is an integer
+- Else return a 404 error
+
+To run the file:
+$ `python3 -m web_flask.4-number_route`
+
+And to test it:
+$ `curl 0.0.0.0:5000/number/89 ; echo "" | cat -e`
+$ `curl 0.0.0.0:5000/number/8.9`
+$ `curl 0.0.0.0:5000/number/python`
