@@ -128,3 +128,19 @@ And to test it:
 $ `curl 0.0.0.0:5000/cities_by_states ; echo ""`
 
 
+## `9-states.py` && `templates/9-states.html`
+
+Create:
+- Route `/states` that uses template `9-states.html`
+- Route `/states/<id>` that also uses template `9-states.html`
+- Template should display all states if no id is given
+- Template should display State name and all cities in state if id is given
+- Template should display "Not found!" if invalid state id is given
+
+To run the file:
+$ `HBNB_MYSQL_USER=hbnb_dev HBNB_MYSQL_PWD=hbnb_dev_pwd HBNB_MYSQL_HOST=localhost HBNB_MYSQL_DB=hbnb_dev_db HBNB_TYPE_STORAGE=db python3 -m web_flask.9-states`
+
+And to test it:
+$ `curl 0.0.0.0:5000/states ; echo ""`
+$ `curl 0.0.0.0:5000/states/421a55f4-7d82-47d9-b54c-a76916479552 ; echo ""`
+$ `curl 0.0.0.0:5000/states/holberton ; echo ""`
