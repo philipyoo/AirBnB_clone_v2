@@ -45,8 +45,8 @@ def number_odd_or_even(n):
 
 @app.route('/states_list')
 def states_list():
-    states = storage.all("State")
-    return render_template('7-states_list.html', states=states)
+    return render_template('7-states_list.html',
+                           states=storage.all("State"))
 
 
 @app.teardown_appcontext
