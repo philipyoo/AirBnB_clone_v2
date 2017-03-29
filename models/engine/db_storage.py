@@ -37,7 +37,6 @@ class DBStorage:
             for instance in self.__session.query(eval(cls)):
                 storage[instance.id] = instance
 
-        self.__session.close()
         return storage
 
     def new(self, obj):
@@ -55,8 +54,6 @@ class DBStorage:
     def update(self, cls, obj_id, key, new_value):
         res = self.__session.query(eval(cls)).filter(eval(cls).id == obj_id)
 
-        print(res.count())
-
         if res.count() == 0:
             return 0
 
@@ -71,7 +68,7 @@ class DBStorage:
         if obj is None:
             return
 
-        eval(obj).query.filter_by(id=obj.id).delete()
+        self.__session.delete(obj)
 
     def close(self):
         self.__session.remove()
