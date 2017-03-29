@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+      {% if state %}
+        <H1>State: {{ state.name }} </H1>
+	<H3>Cities:</H3>
+      {% elif states %}
+        <H1>States</H1>
+      {% else %}
+	<H1>Not Found!</H1>
+      {% endif %}
+      {% if state or states %}
+        <UL>
+	    {%- set vals = states.values() if states else state.cities -%}
+	    {% for item in vals|sort(attribute='name') %}
+              <LI>{{ item.id }}: <B>{{ item.name }}</B></LI>
+	    {% endfor %}
+	</UL>
+      {% endif %}
+    </BODY>
+</HTML>
